@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cursor Hook Capture</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-mark" src="/static/cursor-logo.png" width="26" height="26" alt="Cursor logo" />
+        <div>
+          <h1>Cursor - Hook intercept for governance and controls</h1>
+          <p class="subtitle">Live interception of prompt and MCP hook events</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <label class="toggle">
+          <input id="autoRefresh" type="checkbox" checked />
+          <span>Auto-refresh</span>
+        </label>
+        <button id="refreshBtn" class="btn secondary" type="button">Refresh</button>
+        <button id="clearBtn" class="btn danger" type="button">Clear</button>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="stats">
+        <div class="stat-card">
+          <span class="stat-label">Events</span>
+          <span id="eventCount" class="stat-value">0 / 500</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Visible</span>
+          <span id="visibleCount" class="stat-value">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Last update</span>
+          <span id="lastUpdate" class="stat-value">—</span>
+        </div>
+      </section>
+
+      <section class="filters">
+        <label>
+          <span>Type</span>
+          <select id="filterEvent">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label>
+          <span>Model</span>
+          <select id="filterModel">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label>
+          <span>User</span>
+          <select id="filterUser">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label>
+          <span>Conversation</span>
+          <select id="filterConversation">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label>
+          <span>Session / Turn</span>
+          <select id="filterGeneration">
+            <option value="">All</option>
+          </select>
+        </label>
+        <label class="search">
+          <span>Search</span>
+          <input id="filterSearch" type="search" placeholder="Filter summary, ids, payload..." />
+        </label>
+      </section>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Type</th>
+              <th>User</th>
+              <th>Model</th>
+              <th>Server</th>
+              <th>Tool</th>
+              <th>Decision</th>
+              <th>Conversation</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody id="eventsBody">
+            <tr>
+              <td colspan="9" class="empty">Waiting for events…</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <div id="modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="true"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <header class="modal-header">
+          <div>
+            <h2 id="modalTitle">Event detail</h2>
+            <p id="modalMeta" class="modal-meta"></p>
+          </div>
+          <div class="modal-actions">
+            <button id="copyBtn" class="btn secondary" type="button">Copy JSON</button>
+            <button id="closeBtn" class="btn" type="button">Close</button>
+          </div>
+        </header>
+        <pre id="modalJson" class="json-view"></pre>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
